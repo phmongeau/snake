@@ -29,7 +29,7 @@ package
 			//create some fruits
 			for (i = 0; i <= 10; ++i)
 			{
-				var fruit:FlxSprite = new FlxSprite().makeGraphic(8,8, 0xFFFF0000);
+				var fruit:FlxSprite = new FlxSprite().makeGraphic(8,8, 0xFF00FF00);
 				fruit.kill();
 				fruits.add(fruit);
 			}
@@ -37,7 +37,7 @@ package
 			// set the head of the snake
 			head = snake.getFirstDead() as FlxSprite;
 			// put the head in the center of the screen
-			head.reset(FlxG.width/2, FlxG.height/2);
+			head.reset(162, 117);
 
 			add(snake);
 			add(fruits);
@@ -83,7 +83,7 @@ package
 				if (FlxG.random() * 100 > 85) // Add some fruits sometimes
 				{
 					var f:FlxSprite = fruits.getFirstDead()as FlxSprite;
-					f.reset(FlxG.random() * FlxG.width, FlxG.random() * FlxG.height);
+					f.reset(Math.round(FlxG.random() * 35) * 9  , Math.round(FlxG.random() * 26) * 9);
 				}
 			}
 			
