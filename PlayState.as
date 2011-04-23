@@ -12,9 +12,17 @@ package
 		public var updateRate:Number = 2;
 		private var timer:Number = 1;
 
+		private var scoreUI:FlxText;
+
 		override public function create():void
 		{
 			FlxG.watch(this, "updateRate");
+			FlxG.score = 0;
+			FlxG.watch(FlxG, "score");
+
+			scoreUI = new FlxText(5,5, 100, FlxG.score.toString());
+			add(scoreUI);
+
 			//initialize the groups
 			snake = new FlxGroup();
 			fruits = new FlxGroup();
@@ -84,6 +92,8 @@ package
 				{
 					var f:FlxSprite = fruits.getFirstDead()as FlxSprite;
 					f.reset(Math.round(FlxG.random() * 35) * 9  , Math.round(FlxG.random() * 26) * 9);
+					while(FlxG.overlap(f, snake))
+						f.reset(Math.round(FlxG.random() * 35) * 9  , Math.round(FlxG.random() * 26) * 9);
 				}
 			}
 			
@@ -100,6 +110,9 @@ package
 		{
 			// increase the update rate
 			updateRate += 0.5;
+			// increase score
+			FlxG.score += 1;
+			scoreUI.text = FlxG.score.toString();
 			// Add some snake parts to the snake
 			for (var i:uint; i <= 5; ++i)
 			{
